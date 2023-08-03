@@ -1,0 +1,7 @@
+scheduler:
+  config:
+    schedules:
+      standard:
+        timezone: UTC
+        weekdays: [ ]
+        holidays: [ ]
