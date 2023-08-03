@@ -19,9 +19,20 @@ type YamlConfig struct {
 }
 
 type Schedule struct {
-	Timezone string   `yaml:"timezone"`
-	Weekdays []string `yaml:"weekdays"`
-	Holidays []string `yaml:"holidays"`
+	Timezone string        `yaml:"timezone"`
+	Weekdays []WeekdayInfo `yaml:"weekdays"`
+	Holidays []HolidayInfo `yaml:"holidays"`
+}
+
+type WeekdayInfo struct {
+	Days  []int  `yaml:"days"`
+	Start string `yaml:"start"`
+	Stop  string `yaml:"stop"`
+}
+
+type HolidayInfo struct {
+	Start string `yaml:"start"`
+	Stop  string `yaml:"stop"`
 }
 
 func SchedulerConfig() YamlConfig {
@@ -32,13 +43,13 @@ func SchedulerConfig() YamlConfig {
 	if _, err := os.Stat(schedulerConfigFilePath); err == nil {
 		configData, err := os.ReadFile(schedulerConfigFilePath)
 		if err != nil {
-			fmt.Println("Ошибка чтения файла конфигурации YAML:", err)
+			fmt.Println("Error reading YAML config file:", err)
 			return YamlConfig{}
 		}
 
-		err = yaml.Unmarshal([]byte(configData), &config)
+		err = yaml.Unmarshal(configData, &config)
 		if err != nil {
-			fmt.Println("Ошибка декодирования файла конфигурации YAML:", err)
+			fmt.Println("Error decoding YAML config file:", err)
 			return YamlConfig{}
 		}
 	}

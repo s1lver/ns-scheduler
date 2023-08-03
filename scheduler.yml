@@ -1,7 +1,20 @@
 scheduler:
   config:
     schedules:
-      standard:
+
+      empty:
         timezone: UTC
         weekdays: [ ]
         holidays: [ ]
+
+      standard:
+        timezone: UTC
+        weekdays:
+          - days: [ 1,2,3,4,5 ]
+            start: 09:00
+            stop: 20:00
+        holidays:
+          - stop: 2022-12-23 22:00
+            start: 2023-01-03 09:00
+          - stop: 2023-04-30 22:00
+            start: 2023-05-03 09:00
