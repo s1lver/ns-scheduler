@@ -1,4 +1,4 @@
-module ns-sheduler
+module ns-scheduler
 
 go 1.20
 
